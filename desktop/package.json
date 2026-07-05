@@ -1,0 +1,20 @@
+{
+  "name": "space-dandy-groove-patrol-desktop",
+  "version": "0.1.0",
+  "description": "Space Dandy: Groove Patrol — Electron desktop shell",
+  "private": true,
+  "license": "UNLICENSED",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist:win": "electron-builder --win"
+  },
+  "dependencies": {
+    "steamworks.js": "0.4.0"
+  },
+  "devDependencies": {
+    "electron": "35.7.5",
+    "electron-builder": "25.1.8"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "appId": "com.subtiliorars.spacedandy.groovepatrol",
+  "productName": "Space Dandy Groove Patrol",
+  "directories": {
+    "app": ".",
+    "output": "../dist-electron"
+  },
+  "files": [
+    "main.js",
+    "package.json",
+    "node_modules/**/*",
+    { "from": "../dist", "to": "dist", "filter": ["**/*"] }
+  ],
+  "extraFiles": [{ "from": "steam_appid.txt", "to": "steam_appid.txt" }],
+  "win": {
+    "target": [{ "target": "nsis", "arch": ["x64"] }],
+    "sign": null
+  }
+}

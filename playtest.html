@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Space Dandy: Groove Patrol — Playtest</title>
+    <meta
+      name="description"
+      content="Public playtest build for Space Dandy: Groove Patrol. Neon arcade in the browser."
+    />
+    <meta name="theme-color" content="#0a0014" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #070010;
+        --panel: rgba(12, 0, 28, 0.92);
+        --neon-pink: #ff3eb5;
+        --neon-cyan: #3ef0ff;
+        --neon-yellow: #ffe566;
+        --text: #f4eaff;
+        --muted: #9a8ab8;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: "Share Tech Mono", monospace;
+        color: var(--text);
+        background: radial-gradient(circle at 50% 0%, #1a0033, var(--bg) 55%);
+      }
+      .wrap {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 2rem 1.25rem 3rem;
+      }
+      h1 {
+        font-family: Orbitron, sans-serif;
+        font-size: clamp(1.6rem, 4vw, 2.4rem);
+        margin: 0 0 0.35rem;
+        background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      .tagline {
+        color: var(--muted);
+        margin: 0 0 1.5rem;
+      }
+      .grid {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      }
+      .card {
+        background: var(--panel);
+        border: 1px solid rgba(62, 240, 255, 0.25);
+        border-radius: 12px;
+        padding: 1.25rem;
+        box-shadow: 0 0 24px rgba(255, 62, 181, 0.08);
+      }
+      .card h2 {
+        font-family: Orbitron, sans-serif;
+        font-size: 1rem;
+        margin: 0 0 0.75rem;
+        color: var(--neon-yellow);
+      }
+      ul {
+        margin: 0;
+        padding-left: 1.1rem;
+        color: var(--muted);
+        line-height: 1.55;
+      }
+      .btn-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-top: 1rem;
+      }
+      a.btn {
+        display: inline-block;
+        padding: 0.75rem 1.25rem;
+        border-radius: 8px;
+        text-decoration: none;
+        font-family: Orbitron, sans-serif;
+        font-size: 0.85rem;
+        letter-spacing: 0.04em;
+      }
+      a.btn-primary {
+        background: linear-gradient(135deg, var(--neon-pink), #7b2cff);
+        color: #fff;
+        box-shadow: 0 0 18px rgba(255, 62, 181, 0.35);
+      }
+      a.btn-secondary {
+        border: 1px solid rgba(62, 240, 255, 0.5);
+        color: var(--neon-cyan);
+      }
+      iframe {
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        border: 2px solid rgba(255, 62, 181, 0.35);
+        border-radius: 8px;
+        background: #000;
+      }
+      footer {
+        margin-top: 2rem;
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+      code {
+        color: var(--neon-cyan);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>Space Dandy: Groove Patrol</h1>
+      <p class="tagline">
+        Public playtest · v0.1 · neon arcade slice · fan homage — not affiliated with
+        official Space Dandy IP
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h2>Play now</h2>
+          <iframe
+            src="./index.html"
+            title="Space Dandy Groove Patrol"
+            allow="fullscreen"
+          ></iframe>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="./index.html" target="_blank" rel="noopener"
+              >Open full screen</a
+            >
+            <a
+              class="btn btn-secondary"
+              href="https://github.com/subtiliorars-sys/space-dandy-game"
+              target="_blank"
+              rel="noopener"
+              >Source on GitHub</a
+            >
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Controls</h2>
+          <ul>
+            <li><strong>Move:</strong> ← → or A / D</li>
+            <li><strong>CRT scanlines:</strong> C to toggle</li>
+            <li><strong>Restart:</strong> SPACE on game over</li>
+            <li>Collect cyan groove orbs · dodge pink hazards · chain combos</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h2>Feedback</h2>
+          <ul>
+            <li>Early access — juice, music, and waves ship via <code>WAVES.md</code></li>
+            <li>File issues on GitHub with repro steps + browser</li>
+            <li>itch.io listing: see repo <code>docs/ITCH_PASTE_READY.md</code></li>
+          </ul>
+          <div class="btn-row">
+            <a
+              class="btn btn-secondary"
+              href="https://github.com/subtiliorars-sys/space-dandy-game/issues/new?labels=playtest&title=Playtest%20feedback"
+              target="_blank"
+              rel="noopener"
+              >Send playtest note</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        Part of the JimmyTheHat game fleet · Deployed via GitHub Pages ·
+        <a href="https://subtiliorars-sys.github.io/space-dandy-game/playtest.html"
+          >playtest.html</a
+        >
+      </footer>
+    </div>
+  </body>
+</html>
