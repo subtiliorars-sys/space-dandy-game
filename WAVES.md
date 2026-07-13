@@ -27,13 +27,13 @@ One wave = one PR. Branch prefix: `automation/wave-*`. Verify: `npm run verify`.
 **Shipped:** score-tier hazard/spawn curve + brief GROOVE SURGE ×2 windows
 
 ### Wave SD-W5 — itch.io polish pass
-**Status:** `pending`  
-- [ ] Cover image 630×500
-- [ ] Screenshot set for store page
-- [ ] Butler push script (owner `BUTLER_API_KEY`)
+**Status:** `done` (2026-07-13)  
+- [x] Cover image 630×500 (`docs/cover.jpg`)
+- [x] Screenshot set for store page (`docs/screenshot.jpg`)
+- [x] Butler push script (owner `BUTLER_API_KEY`) (`scripts/deploy-itchio.ps1`)
 
 ### Wave SD-W6 — Warp Patrol crossover (shared ship fuel)
-**Status:** `active` (2026-07-13)  
+**Status:** `done` (2026-07-13)  
 - [x] Read shared lore: `agent-corps/concepts/WARP_PATROL_SHARED.md` (not found/needed)
 - [x] Groove coins contribute to crossover fuel key (when WM-W3 lands)
 - [x] Title screen nod to Warp Division / destination ???
@@ -45,6 +45,8 @@ One wave = one PR. Branch prefix: `automation/wave-*`. Verify: `npm run verify`.
 
 ## Completed
 
+- **SD-W6** — Warp Patrol crossover fuel sync
+- **SD-W5** — itch.io polish pass (artwork assets + butler deploy script)
 - **SD-W4** — difficulty tiers + groove surge windows
 - **SD-W3** — mobile touch lanes + safe-area HUD
 - **SD-W2** — audio juice (Web Audio stubs + mute + groove loop)

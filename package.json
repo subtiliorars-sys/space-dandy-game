@@ -12,6 +12,7 @@
     "test": "vitest run",
     "verify": "tsc --noEmit && vitest run && vite build && powershell -ExecutionPolicy Bypass -File ./scripts/verify-html.ps1",
     "package:itch": "powershell -ExecutionPolicy Bypass -File ./scripts/package-itchio.ps1",
+    "deploy:itch": "powershell -ExecutionPolicy Bypass -File ./scripts/deploy-itchio.ps1",
     "desktop:install": "cd desktop && npm ci",
     "desktop:start": "npm run build && cd desktop && npm run start",
     "desktop:pack": "npm run build && cd desktop && npm run pack"
