@@ -1,22 +1,22 @@
-﻿# Redeploy static build to gh-pages (no workflow OAuth scope required).
+﻿# Redeploy static UI build to gh-pages (avoids needing `workflow` OAuth scope).
 # Usage: powershell -File scripts/deploy-gh-pages.ps1
+# Requires GitHub Pages source: branch gh-pages, folder / (Settings → Pages).
 $ErrorActionPreference = "Stop"
-Remove-Item Env:GITHUB_TOKEN -ErrorAction SilentlyContinue
 Set-Location (Split-Path $PSScriptRoot -Parent)
 if (Test-Path package-lock.json) { npm ci } else { npm install }
 npm run build
-$stage = Join-Path $env:TEMP ("pages-deploy-" + [guid]::NewGuid().ToString("n"))
+$stage = Join-Path $env:TEMP ("space-dandy-game-gh-pages-" + [guid]::NewGuid().ToString("n"))
 New-Item -ItemType Directory -Path $stage | Out-Null
 Copy-Item -Recurse -Force .\dist\* $stage\
 New-Item -ItemType File -Path (Join-Path $stage ".nojekyll") -Force | Out-Null
-$remote = (git remote get-url origin)
 Push-Location $stage
 git init -q
 git checkout -b gh-pages | Out-Null
 git add -A
-git -c user.email="pages-deploy@local" -c user.name="pages-deploy" commit -qm "deploy: Pages"
-git remote add origin $remote
+git -c user.email="pages-deploy@local" -c user.name="pages-deploy" commit -qm "deploy: space-dandy-game"
+git remote add origin https://github.com/subtiliorars-sys/space-dandy-game.git
+Remove-Item Env:GITHUB_TOKEN -ErrorAction SilentlyContinue
 git push -f origin gh-pages
 Pop-Location
 Remove-Item -Recurse -Force $stage
-Write-Host "Deployed $remote"
+Write-Host "Deployed https://subtiliorars-sys.github.io/space-dandy-game/"
