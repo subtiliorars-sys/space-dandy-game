@@ -54,3 +54,9 @@ Autonomous worker reads `WAVES.md` â€” one wave = one PR, branch prefix `au
 No dark patterns, no loot boxes, no FOMO timers. See `GOVERNANCE.md`.
 
 
+
+
+## Shared asset libraries
+
+**Agents:** do not invent colored-box placeholders when free art exists.
+See [docs/ASSETS.md](docs/ASSETS.md) â†’ `game-visual-assets`, `game-audio-assets`, `game-3d-assets`.
