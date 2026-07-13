@@ -73,7 +73,7 @@ export class TitleScene extends Phaser.Scene {
       .setOrigin(0.5);
 
     this.add
-      .text(GAME_WIDTH / 2, GAME_HEIGHT - 48, "← → move  ·  C CRT  ·  M mute  ·  fan homage — not official IP", {
+      .text(GAME_WIDTH / 2, GAME_HEIGHT - 48, "← → move  ·  C CRT  ·  M mute  ·  Esc pause  ·  fan homage — not official IP", {
         fontFamily: "monospace",
         fontSize: "14px",
         color: "#7b6a99",

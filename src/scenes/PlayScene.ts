@@ -57,6 +57,8 @@ export class PlayScene extends Phaser.Scene {
   private touchMove = 0;
   private pad = hudPadding(readSafeInsetsFromDocument());
   private surge: SurgeState = createSurgeState();
+  private paused = false;
+  private pauseOverlay!: Phaser.GameObjects.Text;
 
   constructor() {
     super("PlayScene");
@@ -125,6 +127,26 @@ export class PlayScene extends Phaser.Scene {
       this.audio.toggleMute();
       this.refreshHud();
     });
+    this.input.keyboard!.on("keydown-ESC", () => this.togglePause());
+
+    this.pauseOverlay = this.add
+      .text(
+        GAME_WIDTH / 2,
+        GAME_HEIGHT / 2,
+        "",
+        {
+          fontFamily: "monospace",
+          fontSize: "18px",
+          color: "#f4eaff",
+          align: "center",
+          backgroundColor: "#000000aa",
+          padding: { x: 16, y: 12 },
+        },
+      )
+      .setOrigin(0.5)
+      .setScrollFactor(0)
+      .setDepth(2000)
+      .setVisible(false);
 
     this.audio.ensureStarted();
     this.audio.startGroove();
@@ -139,6 +161,7 @@ export class PlayScene extends Phaser.Scene {
   }
 
   update(_time: number, delta: number): void {
+    if (this.paused) return;
     const dt = delta / 1000;
     this.scroll += delta * 0.08;
     drawSpaceGrid(this.grid, GAME_WIDTH, GAME_HEIGHT, this.scroll);
@@ -271,6 +294,17 @@ export class PlayScene extends Phaser.Scene {
     this.items.push(item);
   }
 
+  private togglePause(): void {
+    this.paused = !this.paused;
+    if (this.paused) this.refreshPauseOverlay();
+    this.pauseOverlay.setVisible(this.paused);
+  }
+
+  private refreshPauseOverlay(): void {
+    const mute = this.audio.isMuted() ? "muted" : "on";
+    this.pauseOverlay.setText(`PAUSED\n← → move · C CRT · M ${mute}\nEsc resume`);
+  }
+
   private refreshHud(): void {
     this.hudScore.setText(`Score ${this.score}`);
     this.hudCombo.setText(this.combo > 1 ? `Combo x${this.combo}` : "");
@@ -278,6 +312,7 @@ export class PlayScene extends Phaser.Scene {
     this.hudCrt.setText(`CRT ${this.crt.enabled ? "ON" : "OFF"}`);
     this.hudMute.setText(formatMuteHudLabel(this.audio.isMuted(), true));
     this.hudSurge.setText(this.surge.active ? "GROOVE SURGE ×2" : "");
+    if (this.paused) this.refreshPauseOverlay();
   }
 
   private endRun(): void {
