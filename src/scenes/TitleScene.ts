@@ -3,6 +3,7 @@ import { getGrooveAudio } from "../audio/grooveAudio.js";
 import { drawSpaceGrid } from "../render/shapes.js";
 import { GAME_HEIGHT, GAME_WIDTH } from "../game.js";
 import { readHighScoreFromStorage } from "../sim/score.js";
+import { formatMuteHudLabel } from "../ui/muteHudLabel.js";
 
 export class TitleScene extends Phaser.Scene {
   private grid!: Phaser.GameObjects.Graphics;
@@ -97,7 +98,7 @@ export class TitleScene extends Phaser.Scene {
   }
 
   private refreshMuteHud(): void {
-    this.muteHud.setText(`Mute ${this.audio.isMuted() ? "ON" : "OFF"} (M)`);
+    this.muteHud.setText(formatMuteHudLabel(this.audio.isMuted()));
   }
 
   update(_time: number, delta: number): void {

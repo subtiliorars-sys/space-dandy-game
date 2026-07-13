@@ -15,6 +15,7 @@ import {
   tierForScore,
   type SurgeState,
 } from "../sim/difficulty.js";
+import { formatMuteHudLabel } from "../ui/muteHudLabel.js";
 import { hudPadding, readSafeInsetsFromDocument } from "../ui/touchLayout.js";
 import { orbPoints, readHighScoreFromStorage, recordRun, writeHighScoreToStorage } from "../sim/score.js";
 import type { RunStats } from "../sim/types.js";
@@ -275,7 +276,7 @@ export class PlayScene extends Phaser.Scene {
     this.hudCombo.setText(this.combo > 1 ? `Combo x${this.combo}` : "");
     this.hudLives.setText(`♥ ${this.lives}`);
     this.hudCrt.setText(`CRT ${this.crt.enabled ? "ON" : "OFF"}`);
-    this.hudMute.setText(`M mute ${this.audio.isMuted() ? "ON" : "OFF"}`);
+    this.hudMute.setText(formatMuteHudLabel(this.audio.isMuted(), true));
     this.hudSurge.setText(this.surge.active ? "GROOVE SURGE ×2" : "");
   }
 
