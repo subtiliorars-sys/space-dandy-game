@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import { getGrooveAudio } from "../audio/grooveAudio.js";
 import { drawSpaceGrid } from "../render/shapes.js";
 import type { RunStats } from "../sim/types.js";
 import { readHighScoreFromStorage } from "../sim/score.js";
@@ -14,6 +15,7 @@ export class GameOverScene extends Phaser.Scene {
 
   create(data: RunStats): void {
     this.grid = this.add.graphics();
+    getGrooveAudio().stopGroove();
     const high = readHighScoreFromStorage((k) => localStorage.getItem(k));
     const isRecord = data.score >= high.best && data.score > 0;
 
