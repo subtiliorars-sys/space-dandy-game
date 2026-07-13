@@ -3,6 +3,7 @@ import { getGrooveAudio } from "../audio/grooveAudio.js";
 import { drawSpaceGrid } from "../render/shapes.js";
 import type { RunStats } from "../sim/types.js";
 import { readHighScoreFromStorage } from "../sim/score.js";
+import { gameOverTapTarget } from "../ui/gameOverTapTarget.js";
 import { GAME_HEIGHT, GAME_WIDTH } from "../game.js";
 
 export class GameOverScene extends Phaser.Scene {
@@ -42,16 +43,24 @@ export class GameOverScene extends Phaser.Scene {
       .setOrigin(0.5);
 
     this.add
-      .text(GAME_WIDTH / 2, GAME_HEIGHT - 80, "SPACE — title   ·   R — retry", {
-        fontFamily: "monospace",
-        fontSize: "16px",
-        color: "#9a8ab8",
-      })
+      .text(
+        GAME_WIDTH / 2,
+        GAME_HEIGHT - 80,
+        "SPACE / tap left — title   ·   R / tap right — retry",
+        {
+          fontFamily: "monospace",
+          fontSize: "16px",
+          color: "#9a8ab8",
+        },
+      )
       .setOrigin(0.5);
 
     this.input.keyboard?.once("keydown-SPACE", () => this.scene.start("TitleScene"));
     this.input.keyboard?.once("keydown-R", () => this.scene.start("PlayScene"));
-    this.input.once("pointerdown", () => this.scene.start("PlayScene"));
+    this.input.once("pointerdown", (pointer: Phaser.Input.Pointer) => {
+      const target = gameOverTapTarget(pointer.x, GAME_WIDTH);
+      this.scene.start(target === "title" ? "TitleScene" : "PlayScene");
+    });
   }
 
   update(_time: number, delta: number): void {
