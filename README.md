@@ -1,12 +1,16 @@
-# Space Dandy: Groove Patrol
+﻿# Space Dandy: Groove Patrol
 
-Neon space arcade mini-game — Phaser 3 + TypeScript. Collect groove orbs, dodge hazards, chase combos. CRT scanline toggle included.
+Neon space arcade mini-game â€” Phaser 3 + TypeScript. Collect groove orbs, dodge hazards, chase combos. CRT scanline toggle included.
 
 **Play (GitHub Pages):** https://subtiliorars-sys.github.io/space-dandy-game/  
 **Playtest hub:** https://subtiliorars-sys.github.io/space-dandy-game/playtest.html  
 **Repo:** https://github.com/subtiliorars-sys/space-dandy-game
 
-> Fan homage with original characters and mechanics — **not** affiliated with official *Space Dandy* IP.
+> Fan homage with original characters and mechanics â€” **not** affiliated with official *Space Dandy* IP.
+
+## First session
+
+See `docs/FIRST-SESSION.md` for first-run expectations.
 
 ## Commands
 
@@ -21,7 +25,7 @@ npm run package:itch   # zip for itch.io HTML upload
 
 | Input | Action |
 |-------|--------|
-| ← → / A D | Move ship |
+| â† â†’ / A D | Move ship |
 | C | Toggle CRT scanlines |
 | SPACE | Start / return to title |
 | R | Quick retry after game over |
@@ -31,7 +35,7 @@ npm run package:itch   # zip for itch.io HTML upload
 ```powershell
 npm run desktop:install
 npm run desktop:start   # build + Electron window
-npm run desktop:pack    # unsigned Windows package → dist-electron/
+npm run desktop:pack    # unsigned Windows package â†’ dist-electron/
 ```
 
 ## Public launch
@@ -42,8 +46,10 @@ npm run desktop:pack    # unsigned Windows package → dist-electron/
 
 ## Waves
 
-Autonomous worker reads `WAVES.md` — one wave = one PR, branch prefix `automation/wave-*`.
+Autonomous worker reads `WAVES.md` â€” one wave = one PR, branch prefix `automation/wave-*`.
 
 ## Ethics
 
 No dark patterns, no loot boxes, no FOMO timers. See `GOVERNANCE.md`.
+
+
