@@ -25,8 +25,9 @@ npm run package:itch   # zip for itch.io HTML upload
 
 | Input | Action |
 |-------|--------|
-| â† â†’ / A D | Move ship |
+| ← → / A D / on-screen ◀ ▶ | Move ship |
 | C | Toggle CRT scanlines |
+| M | Mute / unmute (persists) |
 | SPACE | Start / return to title |
 | R | Quick retry after game over |
 
