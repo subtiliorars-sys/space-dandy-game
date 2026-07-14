@@ -16,6 +16,7 @@ import {
   type SurgeState,
 } from "../sim/difficulty.js";
 import { formatMuteHudLabel } from "../ui/muteHudLabel.js";
+import { formatPauseOverlayText } from "../ui/pauseOverlayText.js";
 import { hudPadding, readSafeInsetsFromDocument } from "../ui/touchLayout.js";
 import { orbPoints, formatDisplayScore, readHighScoreFromStorage, recordRun, writeHighScoreToStorage } from "../sim/score.js";
 import type { RunStats } from "../sim/types.js";
@@ -112,6 +113,9 @@ export class PlayScene extends Phaser.Scene {
       .setDepth(900);
 
     this.createTouchLanes();
+    this.input.on("pointerdown", () => {
+      if (this.paused) this.resumeFromPause();
+    });
 
     this.cursors = this.input.keyboard!.createCursorKeys();
     this.keys = {
@@ -264,6 +268,7 @@ export class PlayScene extends Phaser.Scene {
         .setDepth(951);
 
       zone.on("pointerdown", () => {
+        if (this.paused) return;
         this.touchMove = dir;
         this.audio.ensureStarted();
       });
@@ -295,14 +300,24 @@ export class PlayScene extends Phaser.Scene {
   }
 
   private togglePause(): void {
-    this.paused = !this.paused;
-    if (this.paused) this.refreshPauseOverlay();
-    this.pauseOverlay.setVisible(this.paused);
+    if (this.paused) {
+      this.resumeFromPause();
+      return;
+    }
+    this.paused = true;
+    this.touchMove = 0;
+    this.refreshPauseOverlay();
+    this.pauseOverlay.setVisible(true);
+  }
+
+  private resumeFromPause(): void {
+    this.paused = false;
+    this.touchMove = 0;
+    this.pauseOverlay.setVisible(false);
   }
 
   private refreshPauseOverlay(): void {
-    const mute = this.audio.isMuted() ? "muted" : "on";
-    this.pauseOverlay.setText(`PAUSED\n← → move · C CRT · M ${mute}\nEsc resume`);
+    this.pauseOverlay.setText(formatPauseOverlayText(this.audio.isMuted()));
   }
 
   private refreshHud(): void {
