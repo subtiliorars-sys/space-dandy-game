@@ -2,7 +2,7 @@ import Phaser from "phaser";
 import { getGrooveAudio } from "../audio/grooveAudio.js";
 import { drawSpaceGrid } from "../render/shapes.js";
 import { GAME_HEIGHT, GAME_WIDTH } from "../game.js";
-import { readHighScoreFromStorage } from "../sim/score.js";
+import { formatDisplayScore, readHighScoreFromStorage } from "../sim/score.js";
 import { formatMuteHudLabel } from "../ui/muteHudLabel.js";
 
 export class TitleScene extends Phaser.Scene {
@@ -65,7 +65,7 @@ export class TitleScene extends Phaser.Scene {
       .setOrigin(0.5);
 
     this.add
-      .text(GAME_WIDTH / 2, 360, `High score: ${high.best}  ·  Runs: ${high.runs}`, {
+      .text(GAME_WIDTH / 2, 360, `High score: ${formatDisplayScore(high.best)}  ·  Runs: ${high.runs}`, {
         fontFamily: "monospace",
         fontSize: "16px",
         color: "#9a8ab8",
