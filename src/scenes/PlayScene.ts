@@ -20,6 +20,11 @@ import { formatMuteHudLabel } from "../ui/muteHudLabel.js";
 import { formatPauseOverlayText } from "../ui/pauseOverlayText.js";
 import { hudPadding, readSafeInsetsFromDocument } from "../ui/touchLayout.js";
 import { orbPoints, formatDisplayScore, readHighScoreFromStorage, recordRun, writeHighScoreToStorage } from "../sim/score.js";
+import {
+  shouldAutoPauseOnTabHide,
+  shouldAutoResumeOnTabShow,
+  shouldBlockResumeWhileHidden,
+} from "../sim/tabVisibility.js";
 import type { RunStats } from "../sim/types.js";
 import { GAME_HEIGHT, GAME_WIDTH } from "../game.js";
 
@@ -60,7 +65,9 @@ export class PlayScene extends Phaser.Scene {
   private pad = hudPadding(readSafeInsetsFromDocument());
   private surge: SurgeState = createSurgeState();
   private paused = false;
+  private tabAutoPaused = false;
   private pauseOverlay!: Phaser.GameObjects.Text;
+  private onVisibilityChange?: () => void;
 
   constructor() {
     super("PlayScene");
@@ -156,7 +163,26 @@ export class PlayScene extends Phaser.Scene {
     this.audio.ensureStarted();
     this.audio.startGroove();
 
+    this.onVisibilityChange = () => {
+      if (shouldAutoPauseOnTabHide(document.hidden, this.paused)) {
+        this.tabAutoPaused = true;
+        this.paused = true;
+        this.touchMove = 0;
+        this.refreshPauseOverlay();
+        this.pauseOverlay.setVisible(true);
+        return;
+      }
+      if (shouldAutoResumeOnTabShow(document.hidden, this.tabAutoPaused)) {
+        this.tabAutoPaused = false;
+        this.resumeFromPause();
+      }
+    };
+    document.addEventListener("visibilitychange", this.onVisibilityChange);
+
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
+      if (this.onVisibilityChange) {
+        document.removeEventListener("visibilitychange", this.onVisibilityChange);
+      }
       this.audio.stopGroove();
     });
 
@@ -312,6 +338,8 @@ export class PlayScene extends Phaser.Scene {
   }
 
   private resumeFromPause(): void {
+    if (shouldBlockResumeWhileHidden(document.hidden)) return;
+    this.tabAutoPaused = false;
     this.paused = false;
     this.touchMove = 0;
     this.pauseOverlay.setVisible(false);
