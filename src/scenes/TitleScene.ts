@@ -80,7 +80,7 @@ export class TitleScene extends Phaser.Scene {
       })
       .setOrigin(0.5);
 
-    const tipKey = "space-dandy-first-title-tip-v1";
+    const tipKey = "space-dandy-first-title-tip-v2";
     let tipSeen = false;
     try {
       tipSeen = typeof localStorage !== "undefined" && localStorage.getItem(tipKey) === "1";
@@ -89,7 +89,7 @@ export class TitleScene extends Phaser.Scene {
     }
     if (!tipSeen) {
       const tip = this.add
-        .text(GAME_WIDTH / 2, GAME_HEIGHT - 84, "First patrol? SPACE starts · M mutes · Esc pauses", {
+        .text(GAME_WIDTH / 2, GAME_HEIGHT - 84, "First patrol? SPACE starts · M mutes · Esc/tab-hide pauses", {
           fontFamily: "monospace",
           fontSize: "15px",
           color: "#ffd93d",
