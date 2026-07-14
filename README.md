@@ -1,16 +1,20 @@
 ﻿# Space Dandy: Groove Patrol
 
-Neon space arcade mini-game â€” Phaser 3 + TypeScript. Collect groove orbs, dodge hazards, chase combos. CRT scanline toggle included.
+Neon space arcade mini-game — Phaser 3 + TypeScript. Collect groove orbs, dodge hazards, chase combos. CRT scanline toggle included.
 
 **Play (GitHub Pages):** https://subtiliorars-sys.github.io/space-dandy-game/  
 **Playtest hub:** https://subtiliorars-sys.github.io/space-dandy-game/playtest.html  
 **Repo:** https://github.com/subtiliorars-sys/space-dandy-game
 
-> Fan homage with original characters and mechanics â€” **not** affiliated with official *Space Dandy* IP.
+> Fan homage with original characters and mechanics — **not** affiliated with official *Space Dandy* IP.
 
 ## First session
 
 See `docs/FIRST-SESSION.md` for first-run expectations.
+
+### First-run tip
+
+Open [https://subtiliorars-sys.github.io/space-dandy-game/](https://subtiliorars-sys.github.io/space-dandy-game/) (or `npm run dev`). SPACE starts a patrol — M mutes, Esc pauses; fan homage, not official IP.
 
 ## Commands
 
@@ -47,7 +51,7 @@ npm run desktop:pack    # unsigned Windows package â†’ dist-electron/
 
 ## Waves
 
-Autonomous worker reads `WAVES.md` â€” one wave = one PR, branch prefix `automation/wave-*`.
+Autonomous worker reads `WAVES.md` — one wave = one PR, branch prefix `automation/wave-*`.
 
 ## Ethics
 
