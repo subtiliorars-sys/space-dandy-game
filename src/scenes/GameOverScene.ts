@@ -2,7 +2,7 @@ import Phaser from "phaser";
 import { getGrooveAudio } from "../audio/grooveAudio.js";
 import { drawSpaceGrid } from "../render/shapes.js";
 import type { RunStats } from "../sim/types.js";
-import { readHighScoreFromStorage } from "../sim/score.js";
+import { formatDisplayScore, readHighScoreFromStorage } from "../sim/score.js";
 import { gameOverTapTarget } from "../ui/gameOverTapTarget.js";
 import { GAME_HEIGHT, GAME_WIDTH } from "../game.js";
 
@@ -32,7 +32,7 @@ export class GameOverScene extends Phaser.Scene {
       .text(
         GAME_WIDTH / 2,
         190,
-        `Score: ${data.score}\nOrbs: ${data.orbsCollected}  ·  Hits: ${data.hazardsHit}\nBest: ${high.best}${isRecord ? "  NEW!" : ""}`,
+        `Score: ${formatDisplayScore(data.score)}\nOrbs: ${data.orbsCollected}  ·  Hits: ${data.hazardsHit}\nBest: ${formatDisplayScore(high.best)}${isRecord ? "  NEW!" : ""}`,
         {
           fontFamily: "monospace",
           fontSize: "20px",

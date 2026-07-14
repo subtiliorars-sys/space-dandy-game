@@ -1,5 +1,19 @@
 import { describe, expect, it } from "vitest";
-import { loadHighScore, orbPoints, recordRun } from "./score.js";
+import { formatDisplayScore, loadHighScore, orbPoints, recordRun } from "./score.js";
+
+describe("formatDisplayScore", () => {
+  it("formats thousands with commas", () => {
+    expect(formatDisplayScore(0)).toBe("0");
+    expect(formatDisplayScore(999)).toBe("999");
+    expect(formatDisplayScore(1000)).toBe("1,000");
+    expect(formatDisplayScore(142857)).toBe("142,857");
+  });
+
+  it("guards invalid values", () => {
+    expect(formatDisplayScore(-5)).toBe("0");
+    expect(formatDisplayScore(Number.NaN)).toBe("0");
+  });
+});
 
 describe("orbPoints", () => {
   it("starts at 10 and scales with combo", () => {

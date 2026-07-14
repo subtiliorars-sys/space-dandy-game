@@ -6,6 +6,12 @@ export function orbPoints(combo: number): number {
   return 10 + (chain - 1) * 5;
 }
 
+/** Thousands-separated score for HUD and game-over screens. */
+export function formatDisplayScore(score: number): string {
+  if (!Number.isFinite(score) || score < 0) return "0";
+  return Math.floor(score).toLocaleString("en-US");
+}
+
 export function loadHighScore(raw: string | null): PersistedHighScore {
   if (!raw) return { best: 0, runs: 0 };
   try {

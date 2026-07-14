@@ -17,7 +17,7 @@ import {
 } from "../sim/difficulty.js";
 import { formatMuteHudLabel } from "../ui/muteHudLabel.js";
 import { hudPadding, readSafeInsetsFromDocument } from "../ui/touchLayout.js";
-import { orbPoints, readHighScoreFromStorage, recordRun, writeHighScoreToStorage } from "../sim/score.js";
+import { orbPoints, formatDisplayScore, readHighScoreFromStorage, recordRun, writeHighScoreToStorage } from "../sim/score.js";
 import type { RunStats } from "../sim/types.js";
 import { GAME_HEIGHT, GAME_WIDTH } from "../game.js";
 
@@ -306,7 +306,7 @@ export class PlayScene extends Phaser.Scene {
   }
 
   private refreshHud(): void {
-    this.hudScore.setText(`Score ${this.score}`);
+    this.hudScore.setText(`Score ${formatDisplayScore(this.score)}`);
     this.hudCombo.setText(this.combo > 1 ? `Combo x${this.combo}` : "");
     this.hudLives.setText(`♥ ${this.lives}`);
     this.hudCrt.setText(`CRT ${this.crt.enabled ? "ON" : "OFF"}`);
