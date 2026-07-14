@@ -15,6 +15,7 @@ import {
   tierForScore,
   type SurgeState,
 } from "../sim/difficulty.js";
+import { formatLivesHudLabel } from "../ui/livesHudLabel.js";
 import { formatMuteHudLabel } from "../ui/muteHudLabel.js";
 import { formatPauseOverlayText } from "../ui/pauseOverlayText.js";
 import { hudPadding, readSafeInsetsFromDocument } from "../ui/touchLayout.js";
@@ -323,7 +324,7 @@ export class PlayScene extends Phaser.Scene {
   private refreshHud(): void {
     this.hudScore.setText(`Score ${formatDisplayScore(this.score)}`);
     this.hudCombo.setText(this.combo > 1 ? `Combo x${this.combo}` : "");
-    this.hudLives.setText(`♥ ${this.lives}`);
+    this.hudLives.setText(formatLivesHudLabel(this.lives));
     this.hudCrt.setText(`CRT ${this.crt.enabled ? "ON" : "OFF"}`);
     this.hudMute.setText(formatMuteHudLabel(this.audio.isMuted(), true));
     this.hudSurge.setText(this.surge.active ? "GROOVE SURGE ×2" : "");
